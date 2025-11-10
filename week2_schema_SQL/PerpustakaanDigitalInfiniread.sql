@@ -1,0 +1,61 @@
+CREATE TABLE Staff
+(
+  Staff_ID INT NOT NULL AUTO_INCREMENT,
+  Staff_Name VARCHAR(100) NOT NULL,
+  Position VARCHAR(50) NOT NULL,
+  PRIMARY KEY (Staff_ID)
+);
+
+CREATE TABLE Member
+(
+  Mem_ID INT NOT NULL AUTO_INCREMENT,
+  Full_Name VARCHAR(100) NOT NULL,
+  Gender ENUM('Man', 'Woman') NOT NULL,
+  Date_of_Birth DATE NOT NULL,
+  Email VARCHAR(50) NOT NULL,
+  City VARCHAR(50),
+  Province VARCHAR(50),
+  Staff_ID INT NOT NULL,
+  PRIMARY KEY (Mem_ID),
+  FOREIGN KEY (Staff_ID) REFERENCES Staff(Staff_ID)
+);
+
+CREATE TABLE Book
+(
+  Book_ID VARCHAR(20) NOT NULL,
+  Category VARCHAR(20) NOT NULL,
+  Title VARCHAR(100) NOT NULL,
+  ISBN VARCHAR(50) NOT NULL,
+  Pages INT NOT NULL,
+  Pub_Year INT NOT NULL,
+  Age_Rating INT NOT NULL,
+  Max_Borrowdays ENUM('3', '7', '14') NOT NULL,
+  Stock INT NOT NULL,
+  Staff_ID INT NOT NULL,
+  PRIMARY KEY (Book_ID),
+  FOREIGN KEY (Staff_ID) REFERENCES Staff(Staff_ID)
+);
+
+CREATE TABLE Book_Author
+(
+  Author VARCHAR(100) NOT NULL,
+  Book_ID VARCHAR(20) NOT NULL,
+  PRIMARY KEY (Author, Book_ID),
+  FOREIGN KEY (Book_ID) REFERENCES Book(Book_ID)
+);
+
+CREATE TABLE Borrowing
+(
+  Brw_ID INT NOT NULL AUTO_INCREMENT,
+  Brw_Date DATE NOT NULL,
+  Due_Date DATE NOT NULL,
+  Return_Date DATE,
+  Brw_Status ENUM('Borrowed', 'Returned') NOT NULL,
+  Staff_ID INT NOT NULL,
+  Mem_ID INT NOT NULL,
+  Book_ID VARCHAR(20) NOT NULL,
+  PRIMARY KEY (Brw_ID),
+  FOREIGN KEY (Staff_ID) REFERENCES Staff(Staff_ID),
+  FOREIGN KEY (Mem_ID) REFERENCES Member(Mem_ID),
+  FOREIGN KEY (Book_ID) REFERENCES Book(Book_ID)
+);
