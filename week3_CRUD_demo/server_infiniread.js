@@ -6,13 +6,13 @@ const mysql = require('mysql2/promise');
 const app = express();
 app.use(bodyParser.json());
 
-// === konfigurasi DB: sesuaikan dengan environmentmu ===
+// === konfigurasi DB: ===
 const dbConfig = {
   host: 'localhost',
-  user: ' ', // isi sesuai punya kalian
-  password: ' ', //isi sesuai punya kalian
+  user: ' ', 
+  password: ' ', 
   database: 'infiniread',
-  port: 3306 // isi sesuai punya kalian
+  port: 3306 
 };
 
 // helper untuk koneksi
@@ -259,7 +259,7 @@ app.post('/api/members', async (req, res) => {
 });
 
 /* ---------------------------------------------------------
-   PUT — FULL UPDATE MEMBER
+   PUT 
 --------------------------------------------------------- */
 app.put('/api/members/:id', async (req, res) => {
   const {
@@ -377,7 +377,7 @@ app.delete('/api/members', async (req, res) => {
 });
 
 /* ============================================================
-   3) BOOK — FULL REVISED
+   3) BOOK 
    ============================================================
    FITUR:
    - Max_Borrowdays otomatis berdasarkan Pages:
@@ -597,7 +597,7 @@ app.delete('/api/books', async (req, res) => {
 });
 
 /* ============================================================
-   4) BOOK_AUTHOR — FULL REVISED
+   4) BOOK_AUTHOR 
    ============================================================
    FITUR:
    - GET semua author berdasarkan Book_ID
@@ -804,7 +804,7 @@ app.delete('/api/books/:id/authors/many', async (req, res) => {
 });
 
 /* ============================================================
-   5) BORROWING — FULL REVISED
+   5) BORROWING 
    ============================================================*/
 
 const getTodayDatetime = () => {
@@ -1073,3 +1073,4 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`InfiniRead API running on port ${PORT}`);
 });
+
