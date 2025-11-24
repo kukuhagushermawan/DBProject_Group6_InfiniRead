@@ -1,0 +1,51 @@
+/* ========== GLOBAL RESET & BODY ========== */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+body {
+  font-family: "Poppins", system-ui, sans-serif;
+  background: linear-gradient(135deg, #b5e8ff, #d7c9ff 40%, #ffd6e8);
+  color: #1f2933;
+}
+
+/* Default link */
+a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Default button (kalau tidak override) */
+button {
+  font-family: inherit;
+}
+
+/* Helper layout umum */
+.page-wrap {
+  padding: 32px 40px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-title {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: #111827;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 18px;
+}

@@ -1,0 +1,36 @@
+/* ... isi lama tetap ... */
+
+/* ========== LAINNYA ========== */
+/* Untuk link kecil di bawah form (login/register) */
+.bottom-link {
+  text-align: center;
+  margin-top: 14px;
+  font-size: 13px;
+  color: #4b5563;
+}
+
+/* Tombol secondary & link untuk landing page */
+.btn-secondary {
+  display: inline-block;
+  padding: 9px 18px;
+  border-radius: 999px;
+  border: 1px solid #c7d2fe;
+  background: #f4f8ff;
+  color: #1d4ed8;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: 0.15s;
+}
+
+.btn-secondary:hover {
+  background: #e0eaff;
+}
+
+.btn-link {
+  display: inline-block;
+  padding: 6px 8px;
+  font-size: 13px;
+  color: #2563eb;
+  text-decoration: underline;
+}
