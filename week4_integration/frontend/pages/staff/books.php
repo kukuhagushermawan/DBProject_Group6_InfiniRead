@@ -156,13 +156,63 @@ $active = 'books';
     .search-box {
       display: flex;
       gap: 10px;
+      width: 100%;
     }
     .search-input {
-      padding: 8px 12px;
+      flex: 1;
+      padding: 10px 16px;
       border: 1px solid #c7d2fe;
       background: #f4f8ff;
       border-radius: 999px;
       font-size: 14px;
+      color: #111827;
+      outline: none;
+    }
+    .search-input:focus {
+      border-color: #00c6ff;
+      box-shadow: 0 0 0 1px rgba(0, 198, 255, 0.4);
+      background: #eef4ff;
+    }
+
+    /* FORM GRID – supaya mirip gambar kanan */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px 24px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+    .form-group label {
+      font-size: 14px;
+      margin-bottom: 6px;
+      color: #4b5563;
+    }
+    .form-group input,
+    .form-group select {
+      background: #f4f8ff;
+      border: 1px solid #c7d2fe;
+      padding: 9px 11px;
+      border-radius: 10px;
+      font-size: 14px;
+      color: #111827;
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: #00c6ff;
+      box-shadow: 0 0 0 1px rgba(0, 198, 255, 0.4);
+      background: #eef4ff;
+    }
+
+    @media (max-width: 768px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     /* TABLE */
@@ -176,14 +226,21 @@ $active = 'books';
       padding: 10px 12px;
       font-weight: 600;
       color: #4b5563;
+      border-bottom: 1px solid #e5e7eb;
+      text-align: left;
+      white-space: nowrap;
     }
     .data-table td {
       padding: 9px 12px;
       border-bottom: 1px solid #e5e7eb;
       background: #ffffff;
+      color: #111827;
     }
     .data-table tr:nth-child(even) td {
       background: #f9fbff;
+    }
+    .data-table tr:hover td {
+      background: #eef4ff;
     }
 
     /* BUTTONS */
@@ -195,6 +252,14 @@ $active = 'books';
       border-radius: 999px;
       cursor: pointer;
       font-weight: 600;
+      font-size: 13px;
+      box-shadow: 0 10px 25px rgba(0, 198, 255, 0.35);
+      transition: 0.15s;
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.04);
+      box-shadow: 0 14px 30px rgba(0, 198, 255, 0.4);
     }
     .btn-ghost {
       padding: 7px 14px;
@@ -203,6 +268,31 @@ $active = 'books';
       background: #f4f8ff;
       border: 1px solid #c7d2fe;
       cursor: pointer;
+      text-decoration: none;
+      color: #1f2937;
+      transition: 0.15s;
+    }
+    .btn-ghost:hover {
+      background: #e0eaff;
+    }
+
+    /* FLASH MESSAGE */
+    .flash {
+      padding: 10px 12px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+      font-size: 13px;
+      text-align: center;
+    }
+    .flash.success {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+    }
+    .flash.error {
+      background: #fee2e2;
+      color: #b91c1c;
+      border: 1px solid #fecaca;
     }
   </style>
 </head>
@@ -228,7 +318,7 @@ $active = 'books';
              class="search-input"
              placeholder="Cari judul, kategori, ID, atau author..."
              value="<?= htmlspecialchars($keyword) ?>">
-      <button class="btn-primary">Search</button>
+      <button class="btn-primary" type="submit">Search</button>
       <?php if ($keyword !== ''): ?>
         <a href="books.php" class="btn-ghost">Reset</a>
       <?php endif; ?>
@@ -248,7 +338,11 @@ $active = 'books';
       <?php endif; ?>
     </div>
 
-    <?php $val = fn($k, $d='') => $editingBook[$k] ?? $d; ?>
+    <?php
+      $val = function($key, $default = '') use ($editingBook) {
+          return $editingBook[$key] ?? $default;
+      };
+    ?>
 
     <form method="post" class="form-grid">
       <input type="hidden" name="form_type"
@@ -293,8 +387,7 @@ $active = 'books';
 
       <div class="form-group">
         <label>Age Rating (usia minimum)</label>
-        <input type="number" name="Age_Rating"
-               min="0"
+        <input type="number" name="Age_Rating" min="0"
                value="<?= htmlspecialchars($val('Age_Rating')) ?>" required>
       </div>
 
@@ -303,28 +396,30 @@ $active = 'books';
         <select name="Max_Borrowdays" required>
           <?php $sel = $val('Max_Borrowdays'); ?>
           <option value="">Pilih</option>
-          <option value="3"  <?= $sel=='3'?'selected':'' ?>>3 hari</option>
-          <option value="7"  <?= $sel=='7'?'selected':'' ?>>7 hari</option>
-          <option value="14" <?= $sel=='14'?'selected':'' ?>>14 hari</option>
+          <option value="3"  <?= $sel=='3' ? 'selected' : '' ?>>3 hari</option>
+          <option value="7"  <?= $sel=='7' ? 'selected' : '' ?>>7 hari</option>
+          <option value="14" <?= $sel=='14'? 'selected' : '' ?>>14 hari</option>
         </select>
       </div>
 
       <div class="form-group">
         <label>Stok</label>
-        <input type="number" name="Stock"
-               value="<?= htmlspecialchars($val('Stock',0)) ?>" required>
+        <input type="number" name="Stock" min="0"
+               value="<?= htmlspecialchars($val('Stock', 0)) ?>" required>
       </div>
 
       <div class="form-group full">
         <label>File_URL (link buku)</label>
         <input type="text" name="File_URL"
-               value="<?= htmlspecialchars($val('File_URL')) ?>">
+               value="<?= htmlspecialchars($val('File_URL')) ?>"
+               placeholder="https://...">
       </div>
 
       <div class="form-group full">
         <label>Penulis (pisahkan koma)</label>
         <input type="text" name="Authors"
-               value="<?= htmlspecialchars($editingAuths) ?>">
+               value="<?= htmlspecialchars($editingAuths) ?>"
+               placeholder="Contoh: Tere Liye, Andrea Hirata">
       </div>
 
       <div class="form-group full">
@@ -334,7 +429,6 @@ $active = 'books';
       </div>
     </form>
   </div>
-
 
   <!-- ============================= -->
   <!-- TABEL DAFTAR BUKU -->
@@ -364,12 +458,14 @@ $active = 'books';
           <td><?= (int)$b['Stock'] ?></td>
           <td><?= htmlspecialchars($authorMap[$b['Book_ID']] ?? '-') ?></td>
           <td>
-            <a href="books.php?edit_id=<?= urlencode($b['Book_ID']) ?>" class="btn-ghost" style="margin-right:6px;">Edit</a>
+            <a href="books.php?edit_id=<?= urlencode($b['Book_ID']) ?>"
+               class="btn-ghost" style="margin-right:6px;">Edit</a>
 
             <form method="post" style="display:inline"
                   onsubmit="return confirm('Yakin ingin menghapus buku ini?');">
               <input type="hidden" name="form_type" value="delete_book">
-              <input type="hidden" name="book_id" value="<?= htmlspecialchars($b['Book_ID']) ?>">
+              <input type="hidden" name="book_id"
+                     value="<?= htmlspecialchars($b['Book_ID']) ?>">
               <button type="submit" class="btn-ghost">Hapus</button>
             </form>
           </td>
@@ -382,3 +478,4 @@ $active = 'books';
 </div>
 </body>
 </html>
+
