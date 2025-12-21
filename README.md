@@ -14,7 +14,7 @@ peminjaman, pengembalian, serta pemantauan status peminjaman secara terintegrasi
 |----|--------------|-----|
 | 1  | Kukuh Agus Hermawan | 24/533395/PA/22573 |
 | 2  | Aulia Fathus Tsani | 24/534388/PA/22661 |
-| 3  | Alifa Batrisya Nariskwari | 24/535256/PA/22707 |
+| 3  | Alifa Batrisya Nariswari | 24/535256/PA/22707 |
 
 ---
 
