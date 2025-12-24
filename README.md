@@ -1,5 +1,15 @@
 # DBProject_Group6_InfiniRead
 
+## 👥 Anggota Kelompok 6
+
+| No | Nama Anggota | NIM |
+|----|--------------|-----|
+| 1  | Kukuh Agus Hermawan | 24/533395/PA/22573 |
+| 2  | Aulia Fathus Tsani | 24/534388/PA/22661 |
+| 3  | Alifa Batrisya Nariswari | 24/535256/PA/22707 |
+
+---
+
 ## 📚 InfiniRead – Digital Library Management System
 
 InfiniRead adalah sistem manajemen perpustakaan digital yang dikembangkan sebagai bagian dari  
@@ -50,16 +60,6 @@ Melalui akun staff, penguji dapat mengakses **Dashboard Staff** dan mencoba fitu
 
 **Catatan:** Akun uji (*demo account*) ini disediakan **khusus untuk keperluan pengujian akademik**  
 dan **tidak digunakan pada lingkungan produksi**.
-
----
-
-## 👥 Anggota Kelompok 6
-
-| No | Nama Anggota | NIM |
-|----|--------------|-----|
-| 1  | Kukuh Agus Hermawan | 24/533395/PA/22573 |
-| 2  | Aulia Fathus Tsani | 24/534388/PA/22661 |
-| 3  | Alifa Batrisya Nariswari | 24/535256/PA/22707 |
 
 ---
 
